@@ -19,7 +19,6 @@
   "dependencies": {
     "inquirer": "^8.1.2",
     "colors": "^1.4.0"
-    
   },
   "devDependencies": {
     "jest": "^24.9.0"
