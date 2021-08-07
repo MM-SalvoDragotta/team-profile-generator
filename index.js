@@ -1,6 +1,7 @@
 //Include packages needed for this application
 const inquirer = require("inquirer");
 const fs = require("fs");
+//https://www.npmjs.com/package/colors
 const colors = require('colors');
 
 const generateTeam = require ('./src/generateTeamHtml')
@@ -82,7 +83,7 @@ const internQuestions = [
 
 const continueQuestions = [
     {   type: 'rawlist',
-        message: 'Add one of the following or Exit (Generate HTML)',
+        message: 'Add one of the following or Exit (Generate HTML)'.underline.brightGreen,
         choices: ['Add Engineer', 'Add Intern', 'Exit (Generate HTML)'],
         name: 'continueOrExit'
     }
@@ -96,10 +97,11 @@ function  addEmployee() {
             if (answer.continueOrExit ==='Add Engineer' ) {
             addEngineer();
            }
-           if (answer.continueOrExit ==='Add Intern' ) {
+           if (answer.continueOrExit ==='Add Intern') {
             addIntern();
            } 
            if (answer.continueOrExit ==='Exit (Generate HTML)') {
+               console.log(employees)
             writeToFile("./dist/index.html", generateTeam.generateTeamHtml(employees));
             // writeToFile("./dist/index.txt", JSON.stringify(employees));
            }
@@ -117,15 +119,14 @@ function  addEngineer() {
 
 function  addIntern() {
     inquirer
-    .prompt(engineerQuestions)
+    .prompt(internQuestions)
     .then(({ name, id, email, school }) =>{
         employees.push(new Intern(name, id, email, school))        
         addEmployee()
     });
 }
 
-
-// TODO: Create a function to write README file
+// Create a function to write HTML file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (error) => {
         if (error)
@@ -134,8 +135,7 @@ function writeToFile(fileName, data) {
     });
 }
 
-
-// TODO: Create a function to initialize app
+//Create a function to initialise app
 function init() {
     console.log(`Please answer the following questions` .brightYellow)
     inquirer
@@ -146,6 +146,5 @@ function init() {
     });
 }
 
-
-// Function call to initialize app
+// Function call to initialise app
 init();
