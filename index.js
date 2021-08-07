@@ -34,10 +34,33 @@ const managerQuestions = [
     }
 ];
 
+const engineerQuestions = [
+    {
+        type: 'input',        
+        message: `Engineer's name?'` .brightMagenta,
+        name: 'name'
+    },
+    {
+        type: 'input',        
+        message: `Engineer's id?` .brightMagenta,
+        name: 'id'
+    },
+    {
+        type: 'input',
+        message: `Engineer's email?` .brightMagenta,
+        name: 'email',        
+    },
+    {
+        type: 'input',
+        message: `Engineer's GitHub username?` .brightMagenta,
+        name: 'github',        
+    }
+];
+
 const continueQuestions = [
     {   type: 'rawlist',
         message: 'Add one of the following or Exit (Generate HTML)',
-        choices: ['Add Engineer', 'Add Intern', 'Exit'],
+        choices: ['Add Engineer', 'Add Intern', 'Exit (Generate HTML)'],
         name: 'continueOrExit'
     }
 
@@ -52,14 +75,23 @@ function  addEmployee() {
            }
            if (answer.continueOrExit ==='Add Intern' ) {
             addIntern();
-           } else{
+           } 
+           if (answer.continueOrExit ==='Exit (Generate HTML)') {
             writeToFile("./dist/index.html", generateTeam.generateTeamHtml(employees));
+            // writeToFile("./dist/index.txt", JSON.stringify(employees));
            }
- 
-    })
-
+    });
 }
 
+function  addEngineer() {
+    inquirer
+    .prompt(engineerQuestions)
+    .then(({ name, id, email, github }) =>{
+        employees.push(new Engineer(name, id, email, github))        
+        addEmployee()
+    });
+
+}
 
 
 // TODO: Create a function to write README file
@@ -69,7 +101,7 @@ function writeToFile(fileName, data) {
             throw error;
         console.log(' HTML file created!' .brightYellow)
     });
-};
+}
 
 
 // TODO: Create a function to initialize app
@@ -79,8 +111,7 @@ function init() {
     .prompt(managerQuestions)
     .then(({ name, id, email, officeNo }) =>{
         employees.push(new Manager(name, id, email, officeNo))        
-        addEmployee()
-        // writeToFile("./dist/index.txt", JSON.stringify(employees));
+        addEmployee()        
     });
 }
 
