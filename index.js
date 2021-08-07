@@ -34,6 +34,32 @@ const managerQuestions = [
     }
 ];
 
+const continueQuestions = [
+    {   type: 'rawlist',
+        message: 'Add one of the following or Exit (Generate HTML)',
+        choices: ['Add Engineer', 'Add Intern', 'Exit'],
+        name: 'continueOrExit'
+    }
+
+];
+
+function  addEmployee() {
+    inquirer
+        .prompt(continueQuestions)
+        .then(answer => {
+            if (answer.continueOrExit ==='Add Engineer' ) {
+            addEngineer();
+           }
+           if (answer.continueOrExit ==='Add Intern' ) {
+            addIntern();
+           } else{
+            writeToFile("./dist/index.html", generateTeam.generateTeamHtml(employees));
+           }
+ 
+    })
+
+}
+
 
 
 // TODO: Create a function to write README file
@@ -45,15 +71,15 @@ function writeToFile(fileName, data) {
     });
 };
 
+
 // TODO: Create a function to initialize app
 function init() {
     console.log(`Please answer the following questions` .brightYellow)
     inquirer
     .prompt(managerQuestions)
     .then(({ name, id, email, officeNo }) =>{
-        employees.push(new Manager(name, id, email, officeNo))
-        // console.log(data)
-        writeToFile("./dist/index.html", generateTeam.generateTeamHtml(employees));
+        employees.push(new Manager(name, id, email, officeNo))        
+        addEmployee()
         // writeToFile("./dist/index.txt", JSON.stringify(employees));
     });
 }

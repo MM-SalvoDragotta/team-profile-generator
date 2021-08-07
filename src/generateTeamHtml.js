@@ -69,7 +69,7 @@ const generateCard = data => {
                     <p class="title">${teamMember.getRole()}</p>
                     <p class="description">Id: ${teamMember.getId()} </p>
                     <p class="description">Email: <a href="mailto:${teamMember.getEmail()}"> ${teamMember.getEmail()} </a> </p>
-                    <p>${userData(teamMember)}</p>
+                    <p class="description">${userData(teamMember)}</p>
                 </div>          
         `
         }).join('')}
