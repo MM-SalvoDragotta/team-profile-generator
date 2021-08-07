@@ -5,6 +5,10 @@ const colors = require('colors');
 
 const generateTeam = require ('./src/generateTeamHtml')
 
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+
 var employees = [];
 
 const managerQuestions = [
@@ -44,10 +48,13 @@ function writeToFile(fileName, data) {
 // TODO: Create a function to initialize app
 function init() {
     console.log(`Please answer the following questions` .brightYellow)
-    inquirer.prompt(managerQuestions)
-    .then(function (data) {
+    inquirer
+    .prompt(managerQuestions)
+    .then(({ name, id, email, officeNo }) =>{
+        employees.push(new Manager(name, id, email, officeNo))
         // console.log(data)
-        writeToFile("./dist/index.html", markdown.generateMarkdown(data));
+        // writeToFile("./dist/index.html", generateTeam.generateTeamHtml(data));
+        writeToFile("./dist/index.txt", JSON.stringify(employees));
     });
 }
 
