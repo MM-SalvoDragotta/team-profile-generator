@@ -33,7 +33,8 @@ function generateTeamHtml(data) {
 }
 
 const generateCard = data => {
-    const user = employee => {
+
+    const userData = employee => {
         if (employee.officeNumber) {
             return `Office Number: ${employee.officeNumber}`
         }
@@ -41,7 +42,8 @@ const generateCard = data => {
             return `School: ${employee.school}`
         }
         if (employee.github) {
-            return `<p> Github: <a href="https://github.com/${employee.github}"> ${employee.github} </a> </p>`
+            return `<div class="social"><a href="https://github.com/${employee.github} target="_blank"> <i class="fab fa-github fa-2x"></i> </a></div>`
+            // `<p> Github: <a href="https://github.com/${employee.github}" target="_blank"> ${employee.github} </a> </p>`
         }
     };
 
@@ -59,20 +61,19 @@ const generateCard = data => {
 
     
     return `
-        <div class="col-md-6 col-lg-4 item">
-        ${data.map(teamMember => {
-            return `
-
-            <div class="box"> <img class="rounded-circle" src=${userImg(teamMember)}> 
-                <h3 class="name">${teamMember.getName()}</h3>
-                <p class="title">${teamMember.getRole()}</p>
-                <p class="description">Id: ${teamMember.getId()} </p>
-                <p class="description">Email: <a href="mailto:${teamMember.getEmail()}"> ${teamMember.getEmail()} </a> </p>
-                <p>${user(teamMember)}</p>
-             </div>          
-    `
-    }).join('')}
-        </div>
+            <div class="col-md-6 col-lg-4 item">
+            ${data.map( teamMember => {
+                return `
+                <div class="box"> <img class="rounded" src=${userImg(teamMember)}> 
+                    <h3 class="name">${teamMember.getName()}</h3>
+                    <p class="title">${teamMember.getRole()}</p>
+                    <p class="description">Id: ${teamMember.getId()} </p>
+                    <p class="description">Email: <a href="mailto:${teamMember.getEmail()}"> ${teamMember.getEmail()} </a> </p>
+                    <p>${userData(teamMember)}</p>
+                </div>          
+        `
+        }).join('')}
+            </div>
     `
 }
 
