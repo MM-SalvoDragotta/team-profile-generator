@@ -56,7 +56,7 @@ const generateCard = data => {
         }
         if (employee.github) {
             return `<div class="social">GitHub: <a href="https://github.com/${employee.github}" target="_blank"> <i class="fab fa-github"></i> </a></div>`
-            // `<p> Github: <a href="https://github.com/${employee.github}" target="_blank"> ${employee.github} </a> </p>`
+            
         }
     };
 

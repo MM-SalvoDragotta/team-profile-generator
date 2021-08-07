@@ -57,6 +57,29 @@ const engineerQuestions = [
     }
 ];
 
+const internQuestions = [
+    {
+        type: 'input',        
+        message: `Intern's name?'` .brightMagenta,
+        name: 'name'
+    },
+    {
+        type: 'input',        
+        message: `Intern's id?` .brightMagenta,
+        name: 'id'
+    },
+    {
+        type: 'input',
+        message: `Intern's email?` .brightMagenta,
+        name: 'email',        
+    },
+    {
+        type: 'input',
+        message: `Intern's School?` .brightMagenta,
+        name: 'school',        
+    }
+];
+
 const continueQuestions = [
     {   type: 'rawlist',
         message: 'Add one of the following or Exit (Generate HTML)',
@@ -90,7 +113,15 @@ function  addEngineer() {
         employees.push(new Engineer(name, id, email, github))        
         addEmployee()
     });
+}
 
+function  addIntern() {
+    inquirer
+    .prompt(engineerQuestions)
+    .then(({ name, id, email, school }) =>{
+        employees.push(new Intern(name, id, email, school))        
+        addEmployee()
+    });
 }
 
 
