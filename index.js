@@ -53,8 +53,8 @@ function init() {
     .then(({ name, id, email, officeNo }) =>{
         employees.push(new Manager(name, id, email, officeNo))
         // console.log(data)
-        // writeToFile("./dist/index.html", generateTeam.generateTeamHtml(data));
-        writeToFile("./dist/index.txt", JSON.stringify(employees));
+        writeToFile("./dist/index.html", generateTeam.generateTeamHtml(employees));
+        // writeToFile("./dist/index.txt", JSON.stringify(employees));
     });
 }
 

@@ -16,10 +16,11 @@ function generateTeamHtml(data) {
     <div class="team-boxed">
         <div class="container">
             <div class="intro">
-                <h2 class="text-center">Team </h2>                
+                <h2 class="text-center"> Team </h2>                
             </div>
             <div class="row people">
 
+            ${generateCard(data)}
 
             </div>
         </div>
@@ -31,9 +32,49 @@ function generateTeamHtml(data) {
     `
 }
 
+const generateCard = data => {
+    const user = employee => {
+        if (employee.officeNumber) {
+            return `Office Number: ${employee.officeNumber}`
+        }
+        if (employee.school) {
+            return `School: ${employee.school}`
+        }
+        if (employee.github) {
+            return `<p> Github: <a href="https://github.com/${employee.github}"> ${employee.github} </a> </p>`
+        }
+    };
 
+    const userImg = employee => {
+        if (employee.getRole()=="Manager") {
+            return `../assets/images/Manager.png`
+        }
+        if (employee.getRole()=="Engineer") {
+            return `../assets/images/Engineer.png`
+        }
+        if (employee.getRole()=="Intern") {
+            return `../assets/images/Intern.png`
+        }
+    };
 
+    
+    return `
+        <div class="col-md-6 col-lg-4 item">
+        ${data.map(teamMember => {
+            return `
 
+            <div class="box"> <img class="rounded-circle" src=${userImg(teamMember)}> 
+                <h3 class="name">${teamMember.getName()}</h3>
+                <p class="title">${teamMember.getRole()}</p>
+                <p class="description">Id: ${teamMember.getId()} </p>
+                <p class="description">Email: <a href="mailto:${teamMember.getEmail()}"> ${teamMember.getEmail()} </a> </p>
+                <p>${user(teamMember)}</p>
+             </div>          
+    `
+    }).join('')}
+        </div>
+    `
+}
 
 module.exports = {
     generateTeamHtml
