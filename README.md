@@ -59,7 +59,7 @@ Run the following command at the root of your project and answer the prompted qu
 
 `node index.js`
 
-🎥  A video of the typical user flow through the application can be found here [Team Profile Generator Video](./assets/images/TeamGenerator.mp4) 
+🎥  A video of the typical user flow through the application can be found here [Team Profile Generator Video](./dist/TeamGenerator.mp4) 
 
 Also refer to the following screenshots
 
