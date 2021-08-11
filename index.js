@@ -163,7 +163,7 @@ function  addEmployee() {
             addIntern();
            } 
            if (answer.continueOrExit ==='Exit (Generate HTML)') {
-               console.log(employees)
+            //    console.log(employees)
             writeToFile("./dist/index.html", generateTeam.generateTeamHtml(employees));
             // writeToFile("./dist/index.txt", JSON.stringify(employees));
            }
